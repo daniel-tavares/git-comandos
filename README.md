@@ -2,9 +2,8 @@
 
 ## GIT
 
-**git config --global user.name <informar_username>**
-
-**git config --global user.email informar_email**
+**git config --global user.name <informar_username>**  e **git config --global user.email informar_email**
+- Utilizado para configurar o nome e email do usuario que realizar as operações.
 
 **git init**
 -    Transforma o seu diretorio em um repositorio gerenciavel pelo GIT. 
