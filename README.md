@@ -1,5 +1,6 @@
-#  Git comandos
+# GIT COMANDOS
 
+## GIT
 
 **git config --global user.name <informar_username>**
 
@@ -73,13 +74,18 @@
 -  **--abort**  abortar o rebase
 -  **--skip** pular o commit que causa o conflito
 
+**git rebase -i HEAD~3**
+- Mostra a lista dos 3 últimos commits
+- alterar piker para reword permite alterar o comentário de um commit
+
 **git log**
 - mostra o histórico de commits
--
+- **-p:** exibe as alterações realizadas
+- **--pretty=oneline:** exibe apenas hash e comentario
 **git whatchanged**
 - mostra o historico de commits de forma mais detalhado
-- - p : mostra o que foi alterado (git whatchenged -p)
-
+- **- p** : mostra o que foi alterado (git whatchenged -p)
+- **--graph**: exibe o log com um pequeno grafico
 **git tag:** 
 - verificar quais são as versões definitivas ou releases. (tag1.1,tagv1.2)
 
@@ -89,6 +95,7 @@
 **git rm --cached -rf nome_do_arquivo_ou_diretório**  
 - remover arquivos remotos
 
+
 **git blame css/index.css:** 
 - mostra as alterações linha por linha no arquivo, 
 - informar qual o commit essa linha foi inserida,   
@@ -97,6 +104,43 @@
 
 **git  ls-files**
 - mostra os arquivos que estão sendo controlados pelo git
+## EFETUANDO MERGE
+- **Passo1:** git checkout master
+- **Passo2:** git pull origin master
+- **Passo4:** git rebase master desenvolvimento
+- **Passo5:** git merge desenvolvimento
+- **Passo6:** git push origin master
+
+- **git cherry-pick 19f0bb7d8b4be8ecd687b48fca301b71b95eab41:** utilizado para fazer o merge de apenas um commit.
+- **git cherry-pick -n :** A opção -n ou --no-commit permite que recuperemos as alterações de um dado commit sem precisar inseri-lo no histórico local.
+- **git cherry-pick hash_inicial..hash_final:** utilizado para recuperar mais de um commit em sequencia.
+
+## OCULTAR UMA ALTERACAO
+- **git stash**: Esconde uma alteração ainda não comitada e não testada para que seja possivel o comite de uma funcionalidade já testada. 
+- **git stash list**: mostra o que tem no stash
+- **git stach apply stash@{0}**: para retornar as alterações colocadas no stash@{0}.
+- **git stash drop**: apagar tudo que está dentro de um stash.
+- **git stash pop**: recupera o ultimo estado salvo
+ 
+## PROCURANDO COMMITS
+- **git bisect start**: acessar o modo bisect
+- **git bisect bad HEAD**: informa que  o commit atual é ruim
+- **git bisect good codigo_hash**: informa que commit é bom
+- **git bisect bad / git bisect good**: para avançar na consulta    
+- **git stash apply**:  recupera as últimas alterações da pilha sem removê-las.
+
+## REVERTENDO OPERACÕES
+- **Descartando alteracao no estado Working Directory: git checkout nome_arquivo** : desfaz uma alteração realizada em um arquivo em estado "modificado" ou "unstaged" (podemos usar o -- para indicar que é um arquivo e nao uma branch -git checkout -- index)
+
+- **Descartando alterações no Index: git reset HEAD nome_arquivo**: desfaz a operação de **git add**, ou seja, desfaz o estado index, registrado ou staged em que o arquivo se encontra. (HEAD=ultimo commit; HEAD~3=Os tres ultimos commits) retornando para o status Working Directory.
+ - **Descartando commits indesejados: git reset codigo_hash**: desfaz commits tomando como referencia o codigo hash do commit passado como parametro. O arquivo volta para o estado modificado.
+- **Desfazendo commits antigos: git revert codigo_hash**: desfaz um commit especifico sem influenciar em outros commits
+
+##### Outros comandos
+**git reset --hard:** Com este comando, as alterações são removidas do histórico local de commits e também tanto do index quanto do working directory, permanentemente.
+**git reset:** Com este comando, as alterações são removidas do histórico local de commits, do index, mas não doworking directory.
+**git reset --soft:**  Com este comando, as alterações são removidas do histórico local de commits, mas não são removidas do index.
+**git reset --hard HEAD~1:** descrta a alteração do ultimo commit
 
 ## RESOLVER CONFLITO (Quando o mesmo arquivo é alterado nas mesmas linhas)
 - **Passo1:** git pull origin desenvolvimento
@@ -111,8 +155,18 @@
 **git mergetool -t emerge**
 - utilizado para carregar uma interface grafica para resolver conflito
 - 
+## FERRAMENTAS
+- **git-cola;** ferramenta para operar as funcionalidades do git através de interface grafica carregada via console.
+- **Fork:** funcionalidade no Github para transferir um projeto de outro usuario para sua onta pessoal.
+- **pull request:** 
 
-
-
+## CRIANDO ALIAS
+- editar arquivo: ~/.gitconfig
+[alias]
+co= checkout 
+s=status
+logi= log --pretty=oneline
+[color]
+    branch = auto
 
 
